@@ -109,6 +109,19 @@
     if (window.console) window.console.log(message);
   };
 
+  var hex2char = function(hex) {
+    var
+      result = '',
+      n = parseInt(hex, 16);
+    if(n <= 0xFFFF)
+      result += String.fromCharCode(n);
+    else if(n <= 0x10FFFF) {
+      n -= 0x10000
+      result += String.fromCharCode(0xD800 | (n >> 10)) + String.fromCharCode(0xDC00 | (n & 0x3FF));
+    }
+    return result;
+  }
+
   var drawFavicon = function(label, color) {
 
     // fallback to updating the browser title if unsupported
@@ -130,7 +143,20 @@
       context.drawImage(faviconImage, 0, 0, faviconImage.width, faviconImage.height, 0, 0, size, size);
 
       // draw bubble over the top
+      /*
       if ((label + '').length > 0) drawBubble(context, label, color);
+      */
+context.font = 'normal normal normal px/8px sans';
+var content = label.replace(/[Uu]\+10([A-Fa-f0-9]{4})/g, function(str, match) {
+  return hex2char('10' + matches);
+}).replace(/[Uu]\+([A-Fa-f0-9]{1,5})/g, function(str, match) {
+  return hex2char(match);
+})
+console.log(faviconImage.width)
+context.textBaseline= "bottom"
+context.textAlign = "left"
+context.fillText(content, 0, 18)//faviconImage.width, faviconImage.height)
+
 
       // refresh tag in page
       refreshFavicon();

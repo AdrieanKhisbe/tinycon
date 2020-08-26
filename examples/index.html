@@ -1,17 +1,22 @@
 <html>
 	<head>
-		<link rel="icon" href="favicon.ico">
+		<link rel="icon" href="file:///Users/adrienbecchis/git/-mines/-protos/tinycon/examples/favicone.ico">
 		<title>Tinycon</title>
-		
 		<script src="../tinycon.js"></script>
+		<script src="./favemoji.js"></script>
 		<script>
 			(function(){
+				Tinycon.setOptions({abbreviate: false})
+				var icons = ['U+2699', 'U+1F50D', 'U+1F4D6', 'U+1F94A', 'U+1F4CA']; // ⚙', '🔍', '📖				🥊
 				var count = 0;
+				Tinycon.setBubble(icons[count % icons.length]);
+				/*
 				setInterval(function(){
 					++count;
-					Tinycon.setBubble(count);
-
-				}, 1000);
+					console.log(icons[count % icons.length])
+					Tinycon.setBubble(icons[count % icons.length]);
+				}, 5000);
+				*/
 			})();
 		</script>
 	</head>
